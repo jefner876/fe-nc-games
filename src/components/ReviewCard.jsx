@@ -1,21 +1,18 @@
 import styles from "./ReviewCard.module.css";
-const { reviewHeading, reviewCard, votesRow, reviewImg } = styles;
+const { reviewHeading, reviewCard, votesRow, reviewImg, imgCard } = styles;
 
-export const ReviewCard = () => {
+export const ReviewCard = ({ review }) => {
+  const { category, review_img_url, designer, votes, title } = review;
+
   return (
     <section className={reviewCard}>
-      <h3 className={reviewHeading}>Title</h3>
-      <img
-        className={reviewImg}
-        src="https://image.shutterstock.com/image-vector/ui-image-placeholder-wireframes-apps-260nw-1037719204.jpg"
-        alt=""
-      />
-      <p>Category</p>
-      <section className={votesRow}>
-        <p>Designer </p>
-        {"  |  "}
-        <p>Votes</p>
-      </section>
+      <img className={reviewImg} src={review_img_url} alt="" />
+      <h3 className={reviewHeading}>{title}</h3>
+      <p>{category}</p>
+      <p>
+        Designed by: <br></br> {designer}{" "}
+      </p>
+      <p>{votes}</p>
     </section>
   );
 };

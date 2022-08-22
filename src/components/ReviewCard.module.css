@@ -9,13 +9,9 @@
 }
 .reviewHeading {
   font-size: medium;
+  height: min-content;
 }
 .reviewImg {
-  width: 50vw;
-}
-.votesRow {
-  display: flex;
-  justify-content: space-between;
-  height: 1rem;
-  text-align: right;
+  width: 40vw;
+  height: 30vw;
 }
