@@ -1,5 +1,5 @@
 import styles from "./ReviewCard.module.css";
-const { reviewHeading, reviewCard, votesRow, reviewImg, imgCard } = styles;
+const { reviewHeading, reviewCard, reviewImg } = styles;
 
 export const ReviewCard = ({ review }) => {
   const { category, review_img_url, designer, votes, title } = review;
