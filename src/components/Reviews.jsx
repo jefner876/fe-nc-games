@@ -4,9 +4,10 @@ import { ReviewCard } from "./ReviewCard";
 import styles from "./Reviews.module.css";
 const { reviewsWrapper, reviewsHeader } = styles;
 
-export const Reviews = () => {
+export const Reviews = ({ categories }) => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     fetchReviews().then(({ reviews }) => {
       setIsLoading(true);
@@ -20,6 +21,19 @@ export const Reviews = () => {
   return (
     <main>
       <h2 className={reviewsHeader}>Reviews</h2>
+      <label htmlFor="category">Category: </label>
+      <select name="category" id="category">
+        <option key="all" value="all">
+          All
+        </option>
+        {categories.map((category) => {
+          return (
+            <option key={category.slug} value={category.slug}>
+              {category.slug}
+            </option>
+          );
+        })}
+      </select>
       <section className={reviewsWrapper}>
         {reviews.map((review) => {
           return (
