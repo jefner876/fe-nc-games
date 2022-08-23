@@ -6,7 +6,7 @@ export const ReviewCard = ({ review }) => {
 
   return (
     <section className={reviewCard}>
-      <img className={reviewImg} src={review_img_url} alt="" />
+      <img className={reviewImg} src={review_img_url} alt={title} />
       <h3 className={reviewHeading}>{title}</h3>
       <p className={categoryText}>{category}</p>
       <p>Designed by: {designer} </p>
