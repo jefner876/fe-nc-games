@@ -6,6 +6,7 @@
   align-items: center;
   align-content: space-between;
   text-align: center;
+  height: 50vh;
 }
 .reviewHeading {
   font-size: medium;
@@ -13,9 +14,10 @@
 }
 .reviewImageBlockWrapper {
   display: flex;
+  height: 30vh;
 }
 .reviewImg {
-  max-width: 50%;
+  width: 50%;
   margin: 2%;
 }
 .reviewDetailsWrapper {

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { fetchReviewById } from "../api";
 import styles from "../modules/ReviewPage.module.css";
+
 const {
   reviewHeading,
   reviewWrapper,
@@ -15,6 +16,7 @@ const {
 export const ReviewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [review, setReview] = useState({});
+
   const { review_id } = useParams();
   const { category, review_img_url, designer, votes, title, owner } = review;
 
@@ -24,7 +26,8 @@ export const ReviewPage = () => {
       setReview(review);
       setIsLoading(false);
     });
-  }, []);
+  }, [review_id]);
+
   if (isLoading) return <p>Loading...</p>;
   return (
     <main>
@@ -40,7 +43,7 @@ export const ReviewPage = () => {
               <p>Score: {votes}</p>
               <button>➕</button>
             </section>
-            <button>Back to List</button>
+            <Link to="/reviews"> Back to List </Link>
           </section>
         </section>
         Comments Section To Go Here
