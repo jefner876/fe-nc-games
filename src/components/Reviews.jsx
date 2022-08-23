@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchReviews } from "../api";
 import { ReviewCard } from "./ReviewCard";
-import styles from "./Reviews.module.css";
+import styles from "../modules/Reviews.module.css";
 const { reviewsWrapper, reviewsHeader } = styles;
 
 export const Reviews = () => {

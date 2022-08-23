@@ -6,7 +6,7 @@ import { Reviews } from "./components/Reviews";
 import { Title } from "./components/Title";
 import { UserInfoCard } from "./components/UserInfoCard";
 import { UserContext } from "./contexts/User";
-import styles from "./components/Header.module.css";
+import styles from "./modules/Header.module.css";
 const { Header } = styles;
 
 function App() {
@@ -20,12 +20,12 @@ function App() {
     <UserContext.Provider value={{ user }}>
       <div className="App">
         <header className={Header}>
-          <Title></Title>
-          <Nav></Nav>
-          <UserInfoCard></UserInfoCard>
+          <Title />
+          <Nav />
+          <UserInfoCard />
         </header>
         <Routes>
-          <Route path="/reviews" element={<Reviews />}></Route>
+          <Route path="/reviews" element={<Reviews />} />
         </Routes>
       </div>
     </UserContext.Provider>

@@ -1,4 +1,4 @@
-import styles from "./ReviewCard.module.css";
+import styles from "../modules/ReviewCard.module.css";
 const { reviewHeading, reviewCard, reviewImg, categoryText } = styles;
 
 export const ReviewCard = ({ review }) => {
