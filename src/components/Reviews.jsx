@@ -40,6 +40,7 @@ export const Reviews = ({ categories }) => {
         name="category"
         id="category"
         onChange={handleCategoryChange}
+        defaultValue={category}
       >
         <option className={categoryDropdown} key="all" value="all">
           All
@@ -57,7 +58,9 @@ export const Reviews = ({ categories }) => {
         })}
       </select>
       <p>
-        {!categoryNames.includes(category) ? "404: Category not found" : ""}
+        {category && !categoryNames.includes(category)
+          ? "404: Category not found"
+          : ""}
       </p>
       <section className={reviewsWrapper}>
         {reviews
