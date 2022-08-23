@@ -11,18 +11,19 @@ export const Reviews = ({ categories }) => {
 
   const navigate = useNavigate();
   const { category } = useParams();
-
   const categoryNames = categories.map((category) => {
     return category.slug;
   });
+  const verifiedCategory =
+    category && !categoryNames.includes(category) ? null : category;
 
   useEffect(() => {
-    fetchReviews().then(({ reviews }) => {
+    fetchReviews(verifiedCategory).then(({ reviews }) => {
       setIsLoading(true);
       setReviews(reviews);
       setIsLoading(false);
     });
-  }, []);
+  }, [verifiedCategory]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
@@ -59,22 +60,14 @@ export const Reviews = ({ categories }) => {
           })}
         </select>
       </section>
-      <p>
+      <section className={reviewsWrapper}>
         {category && !categoryNames.includes(category)
           ? "404: Category not found"
-          : ""}
-      </p>
-      <section className={reviewsWrapper}>
-        {reviews
-          .filter((review) => {
-            if (!category) return true;
-            return review.category === category;
-          })
-          .map((review) => {
-            return (
-              <ReviewCard key={review.review_id} review={review}></ReviewCard>
-            );
-          })}
+          : reviews.map((review) => {
+              return (
+                <ReviewCard key={review.review_id} review={review}></ReviewCard>
+              );
+            })}
       </section>
     </main>
   );
