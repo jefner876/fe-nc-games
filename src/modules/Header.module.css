@@ -1,0 +1,51 @@
+Header {
+  margin: 2%;
+  min-height: 8vh;
+  max-height: 20vh;
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 50% 50%;
+  grid-template-areas:
+    "title userInfo"
+    "navbar userInfo";
+  font-size: calc(10px + 2vmin);
+  color: black;
+}
+
+.userAvatar {
+  margin-top: 1%;
+  width: 20vw;
+  align-items: flex-end;
+}
+.userInfo {
+  grid-area: userInfo;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+.title {
+  grid-area: title;
+  width: 20vw;
+}
+.navBar {
+  grid-area: navbar;
+  width: 20vw;
+}
+.username {
+  max-width: 20vw;
+  font-size: smaller;
+}
+
+@media only screen and (min-width: 600px) {
+  .userAvatar {
+    margin-top: 1%;
+    width: 15vh;
+  }
+  .userInfo {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  Header {
+    margin: 1% 3% 1% 4%;
+  }
+}

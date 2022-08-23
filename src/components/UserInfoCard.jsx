@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "../contexts/User";
-import styles from "./Header.module.css";
+import styles from "../modules/Header.module.css";
 const { userAvatar, userInfo, username } = styles;
 
 export const UserInfoCard = () => {

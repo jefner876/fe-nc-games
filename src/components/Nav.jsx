@@ -4,7 +4,7 @@ export const Nav = () => {
   return (
     <nav>
       <Link to="/">Home</Link> {" | "}
-      <Link to="/reviews/all">All Reviews</Link>
+      <Link to="/reviews">All Reviews</Link>
     </nav>
   );
 };
