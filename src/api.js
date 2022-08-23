@@ -14,3 +14,11 @@ export const fetchCategories = () => {
     }
   );
 };
+
+export const fetchReviewById = (id) => {
+  return fetch(
+    `https://nc-games-portfolio.herokuapp.com/api/reviews/${id}`
+  ).then((res) => {
+    return res.json();
+  });
+};
