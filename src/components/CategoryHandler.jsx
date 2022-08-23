@@ -18,7 +18,7 @@ export const CategoryHandler = () => {
   return (
     <Routes>
       <Route
-        path="/reviews/all"
+        path="/reviews"
         element={<Reviews categories={categories} />}
       ></Route>
       <Route path="/" element={<Home categories={categories} />}></Route>
