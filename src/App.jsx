@@ -25,7 +25,7 @@ function App() {
           <UserInfoCard></UserInfoCard>
         </header>
         <Routes>
-          <Route path="/reviews/all" element={<Reviews />}></Route>
+          <Route path="/reviews" element={<Reviews />}></Route>
         </Routes>
       </div>
     </UserContext.Provider>
