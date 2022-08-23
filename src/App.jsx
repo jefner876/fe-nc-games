@@ -25,7 +25,7 @@ function App() {
           <UserInfoCard />
         </header>
         <main>
-          <CategoryHandler></CategoryHandler>
+          <CategoryHandler />
         </main>
       </div>
     </UserContext.Provider>
