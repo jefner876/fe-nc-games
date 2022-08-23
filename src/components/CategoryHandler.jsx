@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Reviews } from "./Reviews";
 import { Home } from "./Home";
 import { fetchCategories } from "../api";
+import { ReviewPage } from "./ReviewPage";
 
 export const CategoryHandler = () => {
   const [categories, setCategories] = useState("all");
@@ -26,6 +27,7 @@ export const CategoryHandler = () => {
         element={<Reviews categories={categories} />}
       />
       <Route path="/" element={<Home categories={categories} />} />
+      <Route path="/review/:id" element={<ReviewPage />} />
     </Routes>
   );
 };
