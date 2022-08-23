@@ -1,17 +1,29 @@
 import { Link } from "react-router-dom";
+import styles from "../modules/CategoryCard.module.css";
+import icons from "../icons";
+
+const {
+  categoryHeading,
+  categoryCard,
+  categoryImg,
+  categoryText,
+  categoryLinks,
+} = styles;
+
 export const CategoryCard = ({ category }) => {
   const { description, slug } = category;
 
   return (
-    <section>
-      <Link to={`/reviews/${slug}`}>
-        <h3>{slug}</h3>
-        <p>{description}</p>
+    <section className={categoryCard}>
+      <Link className={categoryLinks} to={`/reviews${slug ? "/" + slug : ""}`}>
+        <h3 className={categoryHeading}>{slug || "All"}</h3>
         <img
-          src="https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png"
+          className={categoryImg}
+          src={!slug ? icons.all : icons[slug] || icons.placeholder}
           alt=""
         />
       </Link>
+      <p className={categoryText}>{description || "All categories"}</p>
     </section>
   );
 };

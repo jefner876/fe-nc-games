@@ -1,0 +1,9 @@
+.categoriesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.categoriesHeader {
+  margin-left: 1rem;
+}
