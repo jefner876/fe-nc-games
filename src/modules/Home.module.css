@@ -1,0 +1,14 @@
+.categoriesWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-right: -1%;
+  margin-left: -1%;
+}
+
+@media only screen and (min-width: 600px) {
+  .categoriesWrapper {
+    margin-left: 4%;
+    margin-right: 4%;
+  }
+}

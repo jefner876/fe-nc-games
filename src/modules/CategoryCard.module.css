@@ -1,0 +1,48 @@
+.categoryCard {
+  max-width: 41vw;
+  margin: 1rem;
+  margin-top: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-between;
+  text-align: center;
+}
+.categoryLinks {
+  max-height: 40vw;
+  width: 40vw;
+  border: groove 2.5vw hsl(0, 0%, 95%);
+  background-color: hsl(0, 0%, 95%);
+  color: inherit;
+}
+.categoryHeading {
+  font-size: medium;
+  height: min-content;
+  text-transform: capitalize;
+}
+
+.categoryImg {
+  width: 20vw;
+  height: 20vw;
+}
+.categoryText {
+  margin: 0rem 0.2rem 0rem 0.2rem;
+  text-align: justify;
+}
+
+@media only screen and (min-width: 600px) {
+  .categoryCard {
+    max-width: 18vw;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+  .categoryImg {
+    width: 10vw;
+    height: 10vw;
+  }
+  .categoryLinks {
+    max-height: 18vw;
+    max-width: 18vw;
+    margin: 2%;
+  }
+}

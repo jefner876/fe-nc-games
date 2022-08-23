@@ -1,12 +1,11 @@
-import { Route, Routes } from "react-router-dom";
 import { useState } from "react";
 import "./App.css";
 import { Nav } from "./components/Nav";
-import { Reviews } from "./components/Reviews";
 import { Title } from "./components/Title";
 import { UserInfoCard } from "./components/UserInfoCard";
 import { UserContext } from "./contexts/User";
 import styles from "./modules/Header.module.css";
+import { CategoryHandler } from "./components/CategoryHandler";
 const { Header } = styles;
 
 function App() {
@@ -16,6 +15,7 @@ function App() {
     avatar_url:
       "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Limes.jpg/1200px-Limes.jpg?20070108050319",
   });
+
   return (
     <UserContext.Provider value={{ user }}>
       <div className="App">
@@ -24,9 +24,9 @@ function App() {
           <Nav />
           <UserInfoCard />
         </header>
-        <Routes>
-          <Route path="/reviews" element={<Reviews />} />
-        </Routes>
+        <main>
+          <CategoryHandler />
+        </main>
       </div>
     </UserContext.Provider>
   );
