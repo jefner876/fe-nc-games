@@ -7,6 +7,7 @@ import { fetchCategories } from "../api";
 export const CategoryHandler = () => {
   const [categories, setCategories] = useState("all");
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     fetchCategories().then(({ categories }) => {
       setIsLoading(true);
@@ -14,14 +15,17 @@ export const CategoryHandler = () => {
       setIsLoading(false);
     });
   }, []);
+
   if (isLoading) return <p>Loading...</p>;
+
   return (
     <Routes>
+      <Route path="/reviews" element={<Reviews categories={categories} />} />
       <Route
-        path="/reviews"
+        path="/reviews/:category"
         element={<Reviews categories={categories} />}
-      ></Route>
-      <Route path="/" element={<Home categories={categories} />}></Route>
+      />
+      <Route path="/" element={<Home categories={categories} />} />
     </Routes>
   );
 };
