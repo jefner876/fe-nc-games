@@ -1,11 +1,11 @@
 .reviewCard {
-  max-width: 40vw;
+  max-width: 41vw;
   margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+  align-content: space-between;
   text-align: center;
-  width: 50vw;
 }
 .reviewHeading {
   font-size: medium;

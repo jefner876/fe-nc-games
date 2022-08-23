@@ -33,30 +33,32 @@ export const Reviews = ({ categories }) => {
 
   return (
     <main>
-      <h2 className={reviewsHeader}>Reviews</h2>
-      <label htmlFor="category">Category: </label>
-      <select
-        className={categoryDropdown}
-        name="category"
-        id="category"
-        onChange={handleCategoryChange}
-        defaultValue={category}
-      >
-        <option className={categoryDropdown} key="all" value="all">
-          All
-        </option>
-        {categories.map((category) => {
-          return (
-            <option
-              className={categoryDropdown}
-              key={category.slug}
-              value={category.slug}
-            >
-              {category.slug}
-            </option>
-          );
-        })}
-      </select>
+      <section className={reviewsHeader}>
+        <h2>Reviews</h2>
+        <label htmlFor="category">Category: </label>
+        <select
+          className={categoryDropdown}
+          name="category"
+          id="category"
+          onChange={handleCategoryChange}
+          defaultValue={category}
+        >
+          <option className={categoryDropdown} key="all" value="all">
+            All
+          </option>
+          {categories.map((category) => {
+            return (
+              <option
+                className={categoryDropdown}
+                key={category.slug}
+                value={category.slug}
+              >
+                {category.slug}
+              </option>
+            );
+          })}
+        </select>
+      </section>
       <p>
         {category && !categoryNames.includes(category)
           ? "404: Category not found"
