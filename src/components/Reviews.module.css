@@ -6,3 +6,7 @@
 .reviewsHeader {
   margin-left: 1rem;
 }
+
+.categoryDropdown {
+  text-transform: capitalize;
+}

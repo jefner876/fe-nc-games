@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchReviews } from "../api";
 import { ReviewCard } from "./ReviewCard";
 import styles from "./Reviews.module.css";
-const { reviewsWrapper, reviewsHeader } = styles;
+const { reviewsWrapper, reviewsHeader, categoryDropdown } = styles;
 
 export const Reviews = ({ categories }) => {
   const [reviews, setReviews] = useState([]);
@@ -16,19 +16,27 @@ export const Reviews = ({ categories }) => {
     });
   }, []);
 
+  const handleCategoryChange = (event) => {
+    console.log(event.target.value);
+  };
+
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <main>
       <h2 className={reviewsHeader}>Reviews</h2>
       <label htmlFor="category">Category: </label>
-      <select name="category" id="category">
-        <option key="all" value="all">
+      <select name="category" id="category" onChange={handleCategoryChange}>
+        <option className={categoryDropdown} key="all" value="all">
           All
         </option>
         {categories.map((category) => {
           return (
-            <option key={category.slug} value={category.slug}>
+            <option
+              className={categoryDropdown}
+              key={category.slug}
+              value={category.slug}
+            >
               {category.slug}
             </option>
           );
