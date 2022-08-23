@@ -1,0 +1,15 @@
+.reviewsWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.reviewsHeader {
+  margin-left: 1rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .reviewsHeader {
+    margin-left: 4%;
+  }
+}

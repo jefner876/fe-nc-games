@@ -1,0 +1,31 @@
+.reviewCard {
+  max-width: 40vw;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 50vw;
+}
+.reviewHeading {
+  font-size: medium;
+  height: min-content;
+}
+.reviewImg {
+  width: 40vw;
+  height: 30vw;
+}
+.categoryText {
+  text-transform: capitalize;
+}
+
+@media only screen and (min-width: 600px) {
+  .reviewCard {
+    max-width: 20vw;
+    margin: 2%;
+  }
+  .reviewImg {
+    width: 20vw;
+    height: 15vw;
+  }
+}
