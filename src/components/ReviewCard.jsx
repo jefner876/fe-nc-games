@@ -9,9 +9,7 @@ export const ReviewCard = ({ review }) => {
       <img className={reviewImg} src={review_img_url} alt="" />
       <h3 className={reviewHeading}>{title}</h3>
       <p>{category}</p>
-      <p>
-        Designed by: <br></br> {designer}{" "}
-      </p>
+      <p>Designed by: {designer} </p>
       <p>{votes}</p>
     </section>
   );

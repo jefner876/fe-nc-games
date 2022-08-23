@@ -15,3 +15,14 @@
   width: 40vw;
   height: 30vw;
 }
+
+@media only screen and (min-width: 600px) {
+  .reviewCard {
+    max-width: 20vw;
+    margin: 2%;
+  }
+  .reviewImg {
+    width: 20vw;
+    height: 15vw;
+  }
+}
