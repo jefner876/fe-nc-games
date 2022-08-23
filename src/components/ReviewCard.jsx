@@ -1,5 +1,5 @@
 import styles from "./ReviewCard.module.css";
-const { reviewHeading, reviewCard, reviewImg } = styles;
+const { reviewHeading, reviewCard, reviewImg, categoryText } = styles;
 
 export const ReviewCard = ({ review }) => {
   const { category, review_img_url, designer, votes, title } = review;
@@ -8,9 +8,9 @@ export const ReviewCard = ({ review }) => {
     <section className={reviewCard}>
       <img className={reviewImg} src={review_img_url} alt="" />
       <h3 className={reviewHeading}>{title}</h3>
-      <p>{category}</p>
+      <p className={categoryText}>{category}</p>
       <p>Designed by: {designer} </p>
-      <p>{votes}</p>
+      <p>Score: {votes}</p>
     </section>
   );
 };
