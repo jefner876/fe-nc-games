@@ -22,6 +22,6 @@ export const useCategories = () => {
         setIsLoading(false);
       })
       .catch((err) => setError(err));
-  });
+  }, []);
   return { categories, error, isLoading };
 };
