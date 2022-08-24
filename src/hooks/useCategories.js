@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export const fetchCategories = () => {
+const fetchCategories = () => {
   return axios
     .get("https://nc-games-portfolio.herokuapp.com/api/categories")
     .then(({ data: categories }) => {

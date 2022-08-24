@@ -1,5 +1,6 @@
 import { Link, useParams } from "react-router-dom";
 import { useReviewById } from "../hooks/useReviewById";
+import { useScore } from "../hooks/useScoreIncrease";
 import styles from "../modules/ReviewPage.module.css";
 import { ErrorHandling } from "./ErrorHandling";
 
@@ -16,10 +17,12 @@ const {
 export const ReviewPage = () => {
   const { review_id } = useParams();
   const { error, review, isLoading } = useReviewById(review_id);
-  const { category, review_img_url, designer, votes, title, owner } = review;
+  const { handleScoreClick, clickedScore, scoreError } = useScore(review_id);
 
   if (error) return <ErrorHandling error={error} />;
   if (isLoading) return <p>Loading...</p>;
+
+  const { category, review_img_url, designer, votes, title, owner } = review;
 
   return (
     <main>
@@ -32,9 +35,10 @@ export const ReviewPage = () => {
             <p>Designed by: {designer} </p>
             <p>Owned by: {owner} </p>
             <section className={scoreSection}>
-              <p>Score: {votes}</p>
-              <button>➕</button>
+              <p>Score: {votes + clickedScore}</p>
+              <button onClick={handleScoreClick}>➕</button>
             </section>
+            <p>{scoreError}</p>
             <Link to="/reviews"> Back to List </Link>
           </section>
         </section>
