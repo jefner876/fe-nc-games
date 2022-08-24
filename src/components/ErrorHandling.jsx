@@ -1,5 +1,4 @@
 export const ErrorHandling = ({ error }) => {
-  console.log(error);
   //custom errors
   if (error.status) {
     return (
