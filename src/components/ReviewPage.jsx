@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { fetchReviewById } from "../api";
+import { useReviewById } from "../hooks/useReviewById";
+import { useScore } from "../hooks/useScoreIncrease";
 import styles from "../modules/ReviewPage.module.css";
 import { ErrorHandling } from "./ErrorHandling";
 
@@ -15,25 +15,15 @@ const {
 } = styles;
 
 export const ReviewPage = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [review, setReview] = useState({});
-  const [error, setError] = useState(null);
-
   const { review_id } = useParams();
-  const { category, review_img_url, designer, votes, title, owner } = review;
-
-  useEffect(() => {
-    fetchReviewById(review_id)
-      .then(({ review }) => {
-        setIsLoading(true);
-        setReview(review);
-        setIsLoading(false);
-      })
-      .catch((err) => setError(err));
-  }, [review_id]);
+  const { error, review, isLoading } = useReviewById(review_id);
+  const { handleScoreClick, clickedScore, scoreError } = useScore(review_id);
 
   if (error) return <ErrorHandling error={error} />;
   if (isLoading) return <p>Loading...</p>;
+
+  const { category, review_img_url, designer, votes, title, owner } = review;
+
   return (
     <main>
       <section className={reviewWrapper}>
@@ -45,9 +35,10 @@ export const ReviewPage = () => {
             <p>Designed by: {designer} </p>
             <p>Owned by: {owner} </p>
             <section className={scoreSection}>
-              <p>Score: {votes}</p>
-              <button>➕</button>
+              <p>Score: {votes + clickedScore}</p>
+              <button onClick={handleScoreClick}>➕</button>
             </section>
+            <p>{scoreError}</p>
             <Link to="/reviews"> Back to List </Link>
           </section>
         </section>
