@@ -1,22 +1,14 @@
 import { Route, Routes } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { Reviews } from "./Reviews";
 import { Home } from "./Home";
-import { fetchCategories } from "../api";
 import { ReviewPage } from "./ReviewPage";
+import { useCategories } from "../hooks/useCategories";
+import { ErrorHandling } from "./ErrorHandling";
 
 export const CategoryHandler = () => {
-  const [categories, setCategories] = useState("all");
-  const [isLoading, setIsLoading] = useState(true);
+  const { categories, error, isLoading } = useCategories();
 
-  useEffect(() => {
-    fetchCategories().then(({ categories }) => {
-      setIsLoading(true);
-      setCategories(categories);
-      setIsLoading(false);
-    });
-  }, []);
-
+  if (error) return <ErrorHandling error={error} />;
   if (isLoading) return <p>Loading...</p>;
 
   return (

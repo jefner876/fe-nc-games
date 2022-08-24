@@ -1,24 +1,20 @@
-import { useEffect, useState } from "react";
-import { fetchReviews } from "../api";
 import { ReviewCard } from "./ReviewCard";
 import styles from "../modules/Reviews.module.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { ErrorHandling } from "./ErrorHandling";
+import { useReviews } from "../hooks/useReviews";
 const { reviewsWrapper, reviewsHeader, categoryDropdown } = styles;
 
 export const Reviews = ({ categories }) => {
-  const [reviews, setReviews] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-
   const navigate = useNavigate();
   const { category } = useParams();
-  const categoryNames = categories.map((category) => {
-    return category.slug;
-  });
 
   let verifiedCategory = null;
   let errorMsg = null;
+
+  const categoryNames = categories.map((category) => {
+    return category.slug;
+  });
 
   if (category && !categoryNames.includes(category)) {
     errorMsg = (
@@ -28,20 +24,13 @@ export const Reviews = ({ categories }) => {
     verifiedCategory = category;
   }
 
-  useEffect(() => {
-    fetchReviews(verifiedCategory)
-      .then(({ reviews }) => {
-        setIsLoading(true);
-        setReviews(reviews);
-        setIsLoading(false);
-      })
-      .catch((err) => setError(err));
-  }, [verifiedCategory]);
+  const { error, reviews, isLoading } = useReviews(verifiedCategory);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
     navigate(`/reviews${category === "all" ? "" : "/" + category}`);
   };
+
   if (error)
     return (
       <p>
