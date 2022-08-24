@@ -1,24 +1,26 @@
+import axios from "axios";
+
 export const fetchReviews = (category) => {
   let queryString = "https://nc-games-portfolio.herokuapp.com/api/reviews";
   if (category) queryString += `?category=${category}`;
 
-  return fetch(queryString).then((res) => {
-    return res.json();
+  return axios.get(queryString).then(({ data: reviews }) => {
+    return reviews;
   });
 };
 
 export const fetchCategories = () => {
-  return fetch("https://nc-games-portfolio.herokuapp.com/api/categories").then(
-    (res) => {
-      return res.json();
-    }
-  );
+  return axios
+    .get("https://nc-games-portfolio.herokuapp.com/api/categories")
+    .then(({ data: categories }) => {
+      return categories;
+    });
 };
 
 export const fetchReviewById = (id) => {
-  return fetch(
-    `https://nc-games-portfolio.herokuapp.com/api/reviews/${id}`
-  ).then((res) => {
-    return res.json();
-  });
+  return axios
+    .get(`https://nc-games-portfolio.herokuapp.com/api/reviews/${id}`)
+    .then(({ data: review }) => {
+      return review;
+    });
 };

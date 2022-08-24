@@ -3,33 +3,51 @@ import { fetchReviews } from "../api";
 import { ReviewCard } from "./ReviewCard";
 import styles from "../modules/Reviews.module.css";
 import { useNavigate, useParams } from "react-router-dom";
+import { ErrorHandling } from "./ErrorHandling";
 const { reviewsWrapper, reviewsHeader, categoryDropdown } = styles;
 
 export const Reviews = ({ categories }) => {
   const [reviews, setReviews] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const navigate = useNavigate();
   const { category } = useParams();
   const categoryNames = categories.map((category) => {
     return category.slug;
   });
-  const verifiedCategory =
-    category && !categoryNames.includes(category) ? null : category;
+
+  let verifiedCategory = null;
+  let errorMsg = null;
+
+  if (category && !categoryNames.includes(category)) {
+    errorMsg = (
+      <ErrorHandling error={{ status: 404, msg: "Category not found" }} />
+    );
+  } else {
+    verifiedCategory = category;
+  }
 
   useEffect(() => {
-    fetchReviews(verifiedCategory).then(({ reviews }) => {
-      setIsLoading(true);
-      setReviews(reviews);
-      setIsLoading(false);
-    });
+    fetchReviews(verifiedCategory)
+      .then(({ reviews }) => {
+        setIsLoading(true);
+        setReviews(reviews);
+        setIsLoading(false);
+      })
+      .catch((err) => setError(err));
   }, [verifiedCategory]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
     navigate(`/reviews${category === "all" ? "" : "/" + category}`);
   };
-
+  if (error)
+    return (
+      <p>
+        Status:{error.response.status} <br></br> {error.response.data.msg}
+      </p>
+    );
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -62,7 +80,7 @@ export const Reviews = ({ categories }) => {
       </section>
       <section className={reviewsWrapper}>
         {category && !categoryNames.includes(category)
-          ? "404: Category not found"
+          ? errorMsg
           : reviews.map((review) => {
               return (
                 <ReviewCard key={review.review_id} review={review}></ReviewCard>
