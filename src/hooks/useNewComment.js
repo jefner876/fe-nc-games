@@ -11,15 +11,20 @@ export const useNewComment = (review_id) => {
     event.preventDefault();
     setCommentError(null);
     const body = event.target[0].value;
-    setAddedComment({
-      body,
-      votes: 0,
-      author: username,
-    });
+    if (!body) setCommentError("Write a comment before you submit");
+    else {
+      event.target[0].value = null;
+      setAddedComment({
+        body,
+        votes: 0,
+        author: username,
+      });
 
-    addComment(review_id, username, body).catch(() => {
-      setCommentError("Something went wrong, please try again");
-    });
+      addComment(review_id, username, body).catch(() => {
+        setCommentError("Something went wrong, please try again");
+        event.target[0].value = body;
+      });
+    }
   };
   return { handleNewCommentSubmit, addedComment, commentError };
 };
