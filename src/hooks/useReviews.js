@@ -9,7 +9,8 @@ export const useReviews = (categories) => {
   const [searchParams] = useSearchParams();
   const sortOptions = Object.fromEntries([...searchParams.entries()]);
   const { category } = useParams();
-  const { sortby: sortBy } = sortOptions;
+  const { sortby: sortBy, order } = sortOptions;
+  console.log(order);
 
   let verifiedCategory = null;
   let invalidCategoryError = null;

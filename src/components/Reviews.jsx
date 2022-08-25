@@ -19,12 +19,20 @@ export const Reviews = ({ categories }) => {
     "votes",
     "comment_count",
   ];
+  const orderOptions = [
+    { screen: "ascending", server: "asc" },
+    { screen: "descending", server: "desc" },
+  ];
 
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <main>
-      <ReviewsSortBar categories={categories} sortByOptions={sortByOptions} />
+      <ReviewsSortBar
+        categories={categories}
+        sortByOptions={sortByOptions}
+        orderOptions={orderOptions}
+      />
       <section className={reviewsWrapper}>
         {error ? (
           <ErrorHandling error={error} />
