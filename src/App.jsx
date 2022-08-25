@@ -10,10 +10,10 @@ const { Header } = styles;
 
 function App() {
   const [user] = useState({
-    username: "mallionaire",
-    name: "haz",
+    username: "jessjelly",
+    name: "Jess Jelly",
     avatar_url:
-      "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Limes.jpg/1200px-Limes.jpg?20070108050319",
+      "https://vignette.wikia.nocookie.net/mrmen/images/4/4f/MR_JELLY_4A.jpg/revision/latest?cb=20180104121141",
   });
 
   return (

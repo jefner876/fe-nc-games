@@ -1,9 +1,9 @@
 import { Link, useParams } from "react-router-dom";
 import { useReviewById } from "../hooks/useReviewById";
-import { useScore } from "../hooks/useScoreIncrease";
 import styles from "../modules/ReviewPage.module.css";
 import { Comments } from "./Comments";
 import { ErrorHandling } from "./ErrorHandling";
+import { AddVote } from "./AddVote";
 
 const {
   reviewHeading,
@@ -12,7 +12,6 @@ const {
   categoryText,
   reviewImageBlockWrapper,
   reviewDetailsWrapper,
-  scoreSection,
   reviewPage,
 } = styles;
 
@@ -20,7 +19,6 @@ export const ReviewPage = () => {
   const { review_id } = useParams();
   const { error, review, isLoading } = useReviewById(review_id);
   const { category, review_img_url, designer, votes, title, owner } = review;
-  const { handleScoreClick, clickedScore, scoreError } = useScore(review_id);
 
   if (error) return <ErrorHandling error={error} />;
   if (isLoading) return <p>Loading...</p>;
@@ -35,16 +33,12 @@ export const ReviewPage = () => {
             <p className={categoryText}>Category: {category}</p>
             <p>Designed by: {designer} </p>
             <p>Owned by: {owner} </p>
-            <section className={scoreSection}>
-              <p>Score: {votes + clickedScore}</p>
-              <button onClick={handleScoreClick}>➕</button>
-            </section>
-            <p>{scoreError}</p>
+            <AddVote review_id={review_id} owner={owner} votes={votes} />
             <Link to="/reviews"> Back to List </Link>
           </section>
         </section>
       </section>
-      <Comments review_id={review_id} />
+      <Comments review_id={review_id} owner={owner} />
     </main>
   );
 };
