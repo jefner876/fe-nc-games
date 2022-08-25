@@ -1,19 +1,19 @@
 import { useEffect, useState } from "react";
-import { fetchReviewById } from "../api";
+import { fetchCommentsByReviewID } from "../api";
 
-export const useReviewById = (review_id) => {
-  const [review, setReview] = useState({});
+export const useComments = (review_id) => {
+  const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchReviewById(review_id)
-      .then(({ review }) => {
+    fetchCommentsByReviewID(review_id)
+      .then(({ comments }) => {
         setIsLoading(true);
-        setReview(review);
+        setComments(comments);
         setIsLoading(false);
       })
       .catch((err) => setError(err));
   }, [review_id]);
-  return { error, review, isLoading };
+  return { error, comments, isLoading };
 };

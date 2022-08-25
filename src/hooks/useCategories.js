@@ -1,13 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-
-const fetchCategories = () => {
-  return axios
-    .get("https://nc-games-portfolio.herokuapp.com/api/categories")
-    .then(({ data: categories }) => {
-      return categories;
-    });
-};
+import { fetchCategories } from "../api";
 
 export const useCategories = () => {
   const [categories, setCategories] = useState("all");
@@ -22,6 +14,6 @@ export const useCategories = () => {
         setIsLoading(false);
       })
       .catch((err) => setError(err));
-  });
+  }, []);
   return { categories, error, isLoading };
 };

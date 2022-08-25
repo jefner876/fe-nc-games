@@ -1,0 +1,19 @@
+.commentCard {
+  display: flex;
+  flex-direction: column;
+  margin: 2%;
+
+  border-top: 2px;
+  border-color: black;
+  border-style: dashed;
+  padding: 2%;
+}
+.commentCardHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-right: 1%;
+}
+.commentBody {
+  text-align: left;
+}

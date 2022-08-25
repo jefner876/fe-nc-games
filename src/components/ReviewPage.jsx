@@ -2,6 +2,7 @@ import { Link, useParams } from "react-router-dom";
 import { useReviewById } from "../hooks/useReviewById";
 import { useScore } from "../hooks/useScoreIncrease";
 import styles from "../modules/ReviewPage.module.css";
+import { Comments } from "./Comments";
 import { ErrorHandling } from "./ErrorHandling";
 
 const {
@@ -12,20 +13,20 @@ const {
   reviewImageBlockWrapper,
   reviewDetailsWrapper,
   scoreSection,
+  reviewPage,
 } = styles;
 
 export const ReviewPage = () => {
   const { review_id } = useParams();
   const { error, review, isLoading } = useReviewById(review_id);
+  const { category, review_img_url, designer, votes, title, owner } = review;
   const { handleScoreClick, clickedScore, scoreError } = useScore(review_id);
 
   if (error) return <ErrorHandling error={error} />;
   if (isLoading) return <p>Loading...</p>;
 
-  const { category, review_img_url, designer, votes, title, owner } = review;
-
   return (
-    <main>
+    <main className={reviewPage}>
       <section className={reviewWrapper}>
         <h3 className={reviewHeading}>{title}</h3>
         <section className={reviewImageBlockWrapper}>
@@ -42,8 +43,8 @@ export const ReviewPage = () => {
             <Link to="/reviews"> Back to List </Link>
           </section>
         </section>
-        Comments Section To Go Here
       </section>
+      <Comments review_id={review_id} />
     </main>
   );
 };
