@@ -15,5 +15,6 @@ export const useReviews = (category) => {
       })
       .catch((err) => setError(err));
   }, [category]);
+
   return { error, reviews, isLoading };
 };

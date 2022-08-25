@@ -3,7 +3,7 @@ import axios from "axios";
 const api = "https://nc-games-portfolio.herokuapp.com/api";
 
 export const fetchCategories = () => {
-  return axios.get(`${api}/categories`).then(({ data: categories }) => {
+  return axios.get(`${api}/categorie`).then(({ data: categories }) => {
     return categories;
   });
 };

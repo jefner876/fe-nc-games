@@ -13,7 +13,9 @@ export const useCategories = () => {
         setCategories(categories);
         setIsLoading(false);
       })
-      .catch((err) => setError(err));
+      .catch((err) =>
+        setError({ status: err.response.status, msg: err.response.data.msg })
+      );
   }, []);
   return { categories, error, isLoading };
 };
