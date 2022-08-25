@@ -1,15 +1,5 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
-
-const fetchCommentsByReviewID = (review_id) => {
-  return axios
-    .get(
-      `https://nc-games-portfolio.herokuapp.com/api/reviews/${review_id}/comments`
-    )
-    .then(({ data: comments }) => {
-      return comments;
-    });
-};
+import { fetchCommentsByReviewID } from "../api";
 
 export const useComments = (review_id) => {
   const [comments, setComments] = useState([]);
