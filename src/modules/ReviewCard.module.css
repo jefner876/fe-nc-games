@@ -1,31 +1,40 @@
 .reviewCard {
-  max-width: 41vw;
+  max-width: 37vw;
   margin: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   align-content: space-between;
   text-align: center;
+  border: groove 2vw hsl(0, 0%, 95%);
+  background-color: hsl(0, 0%, 95%);
+  padding-right: 0.2rem;
+  padding-bottom: 0.2rem;
 }
 .reviewHeading {
   font-size: medium;
   height: min-content;
 }
 .reviewImg {
-  width: 40vw;
+  width: 36vw;
   height: 30vw;
 }
 .categoryText {
   text-transform: capitalize;
 }
+.reviewLinks {
+  color: inherit;
+  text-decoration: none;
+}
 
 @media only screen and (min-width: 600px) {
   .reviewCard {
-    max-width: 20vw;
+    max-width: 18vw;
     margin: 2%;
+    border-width: 0.5rem;
   }
   .reviewImg {
-    width: 20vw;
+    width: 18vw;
     height: 15vw;
   }
 }
