@@ -38,7 +38,7 @@ export const ReviewPage = () => {
           </section>
         </section>
       </section>
-      <Comments review_id={review_id} owner={owner} />
+      <Comments review_id={review_id} reviewOwner={owner} />
     </main>
   );
 };
