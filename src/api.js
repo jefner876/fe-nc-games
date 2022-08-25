@@ -3,7 +3,7 @@ import axios from "axios";
 const api = "https://nc-games-portfolio.herokuapp.com/api";
 
 export const fetchCategories = () => {
-  return axios.get(`${api}/categorie`).then(({ data: categories }) => {
+  return axios.get(`${api}/categories`).then(({ data: categories }) => {
     return categories;
   });
 };
@@ -22,10 +22,11 @@ export const fetchReviewById = (review_id) => {
   });
 };
 
-export const fetchReviews = (category) => {
+export const fetchReviews = (category, sortBy) => {
   let queryString = `${api}/reviews`;
   if (category) queryString += `?category=${category}`;
-
+  if (sortBy && category) queryString += `&sort_by=${sortBy}`;
+  if (sortBy && !category) queryString += `?sort_by=${sortBy}`;
   return axios.get(queryString).then(({ data: reviews }) => {
     return reviews;
   });

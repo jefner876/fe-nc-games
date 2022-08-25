@@ -1,43 +1,33 @@
 import { ReviewCard } from "./ReviewCard";
 import styles from "../modules/Reviews.module.css";
-import { useParams } from "react-router-dom";
 import { ErrorHandling } from "./ErrorHandling";
 import { useReviews } from "../hooks/useReviews";
 import { ReviewsSortBar } from "./ReviewsSortBar";
 const { reviewsWrapper } = styles;
 
 export const Reviews = ({ categories }) => {
-  const { category } = useParams();
+  const { serverError, reviews, isLoading, invalidCategoryError } =
+    useReviews(categories);
+  const error = invalidCategoryError || serverError || null;
 
-  let verifiedCategory = null;
-  let categoryError = null;
-
-  const categoryNames = categories.map((category) => {
-    return category.slug;
-  });
-
-  const categorySelectedInvalid = category && !categoryNames.includes(category);
-
-  if (categorySelectedInvalid) {
-    categoryError = { status: 404, msg: "Category not found" };
-  } else {
-    verifiedCategory = category;
-  }
-
-  const { error, reviews, isLoading } = useReviews(verifiedCategory);
-
-  if (error) {
-    categoryError = error;
-  }
+  const sortByOptions = [
+    "created_at",
+    "title",
+    "category",
+    "designer",
+    "review_body",
+    "votes",
+    "comment_count",
+  ];
 
   if (isLoading) return <p>Loading...</p>;
 
   return (
     <main>
-      <ReviewsSortBar categories={categories} />
+      <ReviewsSortBar categories={categories} sortByOptions={sortByOptions} />
       <section className={reviewsWrapper}>
-        {categorySelectedInvalid ? (
-          <ErrorHandling error={categoryError} />
+        {error ? (
+          <ErrorHandling error={error} />
         ) : (
           reviews.map((review) => {
             return (
