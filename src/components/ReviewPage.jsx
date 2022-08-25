@@ -13,6 +13,7 @@ const {
   reviewImageBlockWrapper,
   reviewDetailsWrapper,
   scoreSection,
+  reviewPage,
 } = styles;
 
 export const ReviewPage = () => {
@@ -25,7 +26,7 @@ export const ReviewPage = () => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <main>
+    <main className={reviewPage}>
       <section className={reviewWrapper}>
         <h3 className={reviewHeading}>{title}</h3>
         <section className={reviewImageBlockWrapper}>
@@ -42,8 +43,8 @@ export const ReviewPage = () => {
             <Link to="/reviews"> Back to List </Link>
           </section>
         </section>
-        <Comments review_id={review_id} />
       </section>
+      <Comments review_id={review_id} />
     </main>
   );
 };
