@@ -45,3 +45,7 @@ export const increaseScore = (review_id) => {
 export const addComment = (review_id, username, body) => {
   return axios.post(`${api}/reviews/${review_id}/comments`, { username, body });
 };
+
+export const removeComment = (comment_id) => {
+  return axios.delete(`${api}/comments/${comment_id}`);
+};

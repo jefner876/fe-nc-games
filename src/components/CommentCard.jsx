@@ -9,11 +9,12 @@ const { commentCard, commentBody, commentCardHeader, postAge, deleteButton } =
   styles;
 
 export const CommentCard = ({ comment }) => {
-  const { body, votes, author, created_at } = comment;
+  const { body, votes, author, created_at, comment_id } = comment;
   const { user } = useContext(UserContext);
   const userIsAuthor = user.username === author;
   const age = secondsToAge((new Date() - new Date(created_at)) / 1000);
-  const { handleDeleteCommentClick, deleteError, deleted } = useDeleteComment();
+  const { handleDeleteCommentClick, deleteError, deleted } =
+    useDeleteComment(comment_id);
   if (deleted) {
     return (
       <section className={commentCard}>
@@ -30,12 +31,12 @@ export const CommentCard = ({ comment }) => {
       <p className={commentBody}>{body}</p>
       <p className={postAge}>{age}</p>
       <section className={deleteButton}>
+        {deleteError ? deleteError : ""}
         {userIsAuthor ? (
           <button onClick={handleDeleteCommentClick}>delete my comment</button>
         ) : (
           <p></p>
         )}
-        {deleteError ? <ErrorHandling error={deleteError} /> : <p></p>}
       </section>
     </section>
   );
