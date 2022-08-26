@@ -1,4 +1,5 @@
 import axios from "axios";
+import { createSearchParams } from "react-router-dom";
 
 const api = "https://nc-games-portfolio.herokuapp.com/api";
 
@@ -22,10 +23,16 @@ export const fetchReviewById = (review_id) => {
   });
 };
 
-export const fetchReviews = (category) => {
+export const fetchReviews = (category, sortBy, order) => {
   let queryString = `${api}/reviews`;
-  if (category) queryString += `?category=${category}`;
+  const params = [];
+  if (sortBy !== null) params.push(["sort_by", sortBy]);
+  if (order !== null) params.push(["order", order]);
+  const searchQuery = createSearchParams(params);
 
+  if (category) queryString += `?category=${category}`;
+  if (category && params.length > 0) queryString += `&${searchQuery}`;
+  if (!category && params.length > 0) queryString += `?${searchQuery}`;
   return axios.get(queryString).then(({ data: reviews }) => {
     return reviews;
   });

@@ -1,0 +1,13 @@
+.reviewsHeader {
+  margin-left: 4%;
+}
+.queryBar {
+  display: flex;
+}
+.dropdownWrapper {
+  width: fit-content;
+}
+.queryDropdown {
+  text-transform: capitalize;
+  width: fit-content;
+}

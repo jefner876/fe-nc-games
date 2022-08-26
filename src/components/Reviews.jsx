@@ -1,80 +1,50 @@
 import { ReviewCard } from "./ReviewCard";
 import styles from "../modules/Reviews.module.css";
-import { useNavigate, useParams } from "react-router-dom";
 import { ErrorHandling } from "./ErrorHandling";
 import { useReviews } from "../hooks/useReviews";
-const { reviewsWrapper, reviewsHeader, categoryDropdown } = styles;
+import { ReviewsSortBar } from "./ReviewsSortBar";
+const { reviewsWrapper, reviewsPage } = styles;
 
 export const Reviews = ({ categories }) => {
-  const navigate = useNavigate();
-  const { category } = useParams();
+  const sortByOptions = [
+    "created_at",
+    "title",
+    "category",
+    "designer",
+    "votes",
+    "comment_count",
+  ];
+  const orderOptions = [
+    { screen: "descending", server: "desc" },
+    { screen: "ascending", server: "asc" },
+  ];
 
-  let verifiedCategory = null;
-  let errorMsg = null;
+  const { serverError, reviews, isLoading, invalidQueryError } = useReviews(
+    categories,
+    sortByOptions,
+    orderOptions
+  );
 
-  const categoryNames = categories.map((category) => {
-    return category.slug;
-  });
-
-  if (category && !categoryNames.includes(category)) {
-    errorMsg = (
-      <ErrorHandling error={{ status: 404, msg: "Category not found" }} />
-    );
-  } else {
-    verifiedCategory = category;
-  }
-
-  const { error, reviews, isLoading } = useReviews(verifiedCategory);
-
-  const handleCategoryChange = (event) => {
-    const category = event.target.value;
-    navigate(`/reviews${category === "all" ? "" : "/" + category}`);
-  };
-
-  if (error)
-    return (
-      <p>
-        Status:{error.response.status} <br></br> {error.response.data.msg}
-      </p>
-    );
+  if (serverError) return <ErrorHandling error={serverError} />;
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <main>
-      <section className={reviewsHeader}>
-        <h2>Reviews</h2>
-        <label htmlFor="category">Category: </label>
-        <select
-          className={categoryDropdown}
-          name="category"
-          id="category"
-          onChange={handleCategoryChange}
-          defaultValue={category}
-        >
-          <option className={categoryDropdown} key="all" value="all">
-            All
-          </option>
-          {categories.map((category) => {
-            return (
-              <option
-                className={categoryDropdown}
-                key={category.slug}
-                value={category.slug}
-              >
-                {category.slug}
-              </option>
-            );
-          })}
-        </select>
-      </section>
+    <main className={reviewsPage}>
+      <ReviewsSortBar
+        categories={categories}
+        sortByOptions={sortByOptions}
+        orderOptions={orderOptions}
+      />
       <section className={reviewsWrapper}>
-        {category && !categoryNames.includes(category)
-          ? errorMsg
-          : reviews.map((review) => {
-              return (
-                <ReviewCard key={review.review_id} review={review}></ReviewCard>
-              );
-            })}
+        {invalidQueryError ? (
+          <ErrorHandling error={invalidQueryError} />
+        ) : (
+          reviews.map((review) => {
+            return (
+              <ReviewCard key={review.review_id} review={review}></ReviewCard>
+            );
+          })
+        )}
       </section>
     </main>
   );
