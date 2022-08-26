@@ -3,7 +3,7 @@ import styles from "../modules/Reviews.module.css";
 import { ErrorHandling } from "./ErrorHandling";
 import { useReviews } from "../hooks/useReviews";
 import { ReviewsSortBar } from "./ReviewsSortBar";
-const { reviewsWrapper } = styles;
+const { reviewsWrapper, reviewsPage } = styles;
 
 export const Reviews = ({ categories }) => {
   const sortByOptions = [
@@ -30,7 +30,7 @@ export const Reviews = ({ categories }) => {
   if (isLoading) return <p>Loading...</p>;
 
   return (
-    <main>
+    <main className={reviewsPage}>
       <ReviewsSortBar
         categories={categories}
         sortByOptions={sortByOptions}
