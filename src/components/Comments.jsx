@@ -20,7 +20,7 @@ export const Comments = ({ review_id, reviewOwner }) => {
         review_id={review_id}
         setRefreshComments={setRefreshComments}
       />
-      {comments.reverse().map((comment) => {
+      {comments.map((comment) => {
         return (
           <CommentCard
             key={comment.comment_id}

@@ -11,7 +11,7 @@ export const useComments = (review_id) => {
     fetchCommentsByReviewID(review_id)
       .then(({ comments }) => {
         setIsLoading(true);
-        setComments(comments);
+        setComments(comments.reverse());
         setIsLoading(false);
       })
       .catch((err) => setError(err));
