@@ -34,3 +34,7 @@ export const fetchReviews = (category) => {
 export const increaseScore = (review_id) => {
   return axios.patch(`${api}/reviews/${review_id}`, { inc_votes: 1 });
 };
+
+export const addComment = (review_id, username, body) => {
+  return axios.post(`${api}/reviews/${review_id}/comments`, { username, body });
+};
