@@ -7,7 +7,7 @@
 .dropdownWrapper {
   width: fit-content;
 }
-.categoryDropdown {
+.queryDropdown {
   text-transform: capitalize;
   width: fit-content;
 }

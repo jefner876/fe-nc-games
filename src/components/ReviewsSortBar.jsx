@@ -1,6 +1,6 @@
 import styles from "../modules/ReviewsSortBar.module.css";
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
-const { reviewsHeader, categoryDropdown, dropdownWrapper, queryBar } = styles;
+const { reviewsHeader, queryDropdown, dropdownWrapper, queryBar } = styles;
 
 export const ReviewsSortBar = ({ categories, sortByOptions, orderOptions }) => {
   const navigate = useNavigate();
@@ -45,19 +45,19 @@ export const ReviewsSortBar = ({ categories, sortByOptions, orderOptions }) => {
         <section className={dropdownWrapper}>
           <label htmlFor="category">Category: </label>
           <select
-            className={categoryDropdown}
+            className={queryDropdown}
             name="category"
             id="category"
             onChange={handleCategoryChange}
             defaultValue={category}
           >
-            <option className={categoryDropdown} key="all" value="all">
+            <option className={queryDropdown} key="all" value="all">
               All
             </option>
             {categories.map((category) => {
               return (
                 <option
-                  className={categoryDropdown}
+                  className={queryDropdown}
                   key={category.slug}
                   value={category.slug}
                 >
@@ -70,7 +70,7 @@ export const ReviewsSortBar = ({ categories, sortByOptions, orderOptions }) => {
         <section className={dropdownWrapper}>
           <label htmlFor="sort-by">Sort by: </label>
           <select
-            className={categoryDropdown}
+            className={queryDropdown}
             name="sort-by"
             id="sort-by"
             onChange={handleSortByChange}
@@ -79,9 +79,10 @@ export const ReviewsSortBar = ({ categories, sortByOptions, orderOptions }) => {
             {sortByOptions.map((sortByOption) => {
               return (
                 <option
-                  className={categoryDropdown}
+                  className={queryDropdown}
                   key={sortByOption}
                   value={sortByOption}
+                  defaultValue={sortby}
                 >
                   {sortByOption.replace(/_/g, " ")}
                 </option>
@@ -92,16 +93,16 @@ export const ReviewsSortBar = ({ categories, sortByOptions, orderOptions }) => {
         <section className={dropdownWrapper}>
           <label htmlFor="order">Order: </label>
           <select
-            className={categoryDropdown}
+            className={queryDropdown}
             name="order"
             id="order"
             onChange={handleOrderChange}
-            defaultValue={category}
+            defaultValue={order}
           >
             {orderOptions.map((order) => {
               return (
                 <option
-                  className={categoryDropdown}
+                  className={queryDropdown}
                   key={order.server}
                   value={order.server}
                 >
