@@ -11,13 +11,12 @@ export const Reviews = ({ categories }) => {
     "title",
     "category",
     "designer",
-    "review_body",
     "votes",
     "comment_count",
   ];
   const orderOptions = [
-    { screen: "ascending", server: "asc" },
     { screen: "descending", server: "desc" },
+    { screen: "ascending", server: "asc" },
   ];
 
   const { serverError, reviews, isLoading, invalidQueryError } = useReviews(
