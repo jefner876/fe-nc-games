@@ -8,7 +8,6 @@ const { reviewsWrapper } = styles;
 export const Reviews = ({ categories }) => {
   const { serverError, reviews, isLoading, invalidCategoryError } =
     useReviews(categories);
-  const error = invalidCategoryError || serverError || null;
 
   const sortByOptions = [
     "created_at",
@@ -34,8 +33,8 @@ export const Reviews = ({ categories }) => {
         orderOptions={orderOptions}
       />
       <section className={reviewsWrapper}>
-        {error ? (
-          <ErrorHandling error={error} />
+        {serverError ? (
+          <ErrorHandling error={serverError} />
         ) : (
           reviews.map((review) => {
             return (

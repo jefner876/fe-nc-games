@@ -6,8 +6,9 @@ export const ReviewsSortBar = ({ categories, sortByOptions, orderOptions }) => {
   const navigate = useNavigate();
 
   const { category } = useParams();
-  const [searchParams] = useSearchParams();
-  const { sortby, order } = Object.fromEntries([...searchParams.entries()]);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const order = searchParams.get("order");
+  const sortby = searchParams.get("sortby");
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
@@ -22,23 +23,19 @@ export const ReviewsSortBar = ({ categories, sortByOptions, orderOptions }) => {
 
   const handleSortByChange = (event) => {
     const newSortBy = event.target.value;
-
-    navigate(
-      `/reviews${
-        category === "all" || !category ? "" : "/" + category
-      }?sortby=${newSortBy}${order ? "&order=" + order : ""}`
-    );
+    const newParams = { sortby: newSortBy };
+    if (order) {
+      newParams.order = order;
+    }
+    setSearchParams(newParams);
   };
   const handleOrderChange = (event) => {
     const newOrder = event.target.value;
-
-    navigate(
-      `/reviews${category === "all" ? "" : "/" + category}${
-        sortby ? "?sortby=" + sortby : ""
-      }${!sortby ? "?order=" + newOrder : ""}${
-        sortby ? "&order=" + newOrder : ""
-      }`
-    );
+    const newParams = { order: newOrder };
+    if (sortby) {
+      newParams.sortby = sortby;
+    }
+    setSearchParams(newParams);
   };
 
   return (

@@ -7,10 +7,9 @@ export const useReviews = (categories) => {
   const [serverError, setServerError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
-  const sortOptions = Object.fromEntries([...searchParams.entries()]);
+  const order = searchParams.get("order");
+  const sortBy = searchParams.get("sortby");
   const { category } = useParams();
-  const { sortby: sortBy, order } = sortOptions;
-  console.log(order);
 
   let verifiedCategory = null;
   let invalidCategoryError = null;
@@ -25,14 +24,14 @@ export const useReviews = (categories) => {
   }
 
   useEffect(() => {
-    fetchReviews(verifiedCategory, sortBy)
+    fetchReviews(verifiedCategory, sortBy, order)
       .then(({ reviews }) => {
         setIsLoading(true);
         setReviews(reviews);
         setIsLoading(false);
       })
       .catch((err) => setServerError(err));
-  }, [verifiedCategory, sortBy]);
+  }, [verifiedCategory, sortBy, order]);
 
   return { serverError, reviews, isLoading, invalidCategoryError };
 };
