@@ -3,9 +3,11 @@ import { CommentCard } from "./CommentCard";
 import styles from "../modules/AddComment.module.css";
 const { commentBox, submitButton } = styles;
 
-export const AddComment = ({ review_id }) => {
-  const { handleNewCommentSubmit, addedComment, commentError } =
-    useNewComment(review_id);
+export const AddComment = ({ review_id, setRefreshComments }) => {
+  const { handleNewCommentSubmit, addedComment, commentError } = useNewComment(
+    review_id,
+    setRefreshComments
+  );
 
   return (
     <section>

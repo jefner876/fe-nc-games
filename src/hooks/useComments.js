@@ -5,6 +5,7 @@ export const useComments = (review_id) => {
   const [comments, setComments] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [refreshComments, setRefreshComments] = useState(false);
 
   useEffect(() => {
     fetchCommentsByReviewID(review_id)
@@ -14,6 +15,6 @@ export const useComments = (review_id) => {
         setIsLoading(false);
       })
       .catch((err) => setError(err));
-  }, [review_id]);
-  return { error, comments, isLoading };
+  }, [review_id, refreshComments]);
+  return { error, comments, isLoading, setRefreshComments };
 };
