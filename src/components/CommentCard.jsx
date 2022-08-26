@@ -1,10 +1,26 @@
+import { useContext } from "react";
+import { UserContext } from "../contexts/User";
+import { useDeleteComment } from "../hooks/useDeleteComment";
 import styles from "../modules/CommentCard.module.css";
 import { secondsToAge } from "../utils/seconds-to-age";
-const { commentCard, commentBody, commentCardHeader, postAge } = styles;
+import { ErrorHandling } from "./ErrorHandling";
+
+const { commentCard, commentBody, commentCardHeader, postAge, deleteButton } =
+  styles;
 
 export const CommentCard = ({ comment }) => {
   const { body, votes, author, created_at } = comment;
+  const { user } = useContext(UserContext);
+  const userIsAuthor = user.username === author;
   const age = secondsToAge((new Date() - new Date(created_at)) / 1000);
+  const { handleDeleteCommentClick, deleteError, deleted } = useDeleteComment();
+  if (deleted) {
+    return (
+      <section className={commentCard}>
+        <p>comment deleted</p>
+      </section>
+    );
+  }
   return (
     <section className={commentCard}>
       <section className={commentCardHeader}>
@@ -13,6 +29,14 @@ export const CommentCard = ({ comment }) => {
       </section>
       <p className={commentBody}>{body}</p>
       <p className={postAge}>{age}</p>
+      <section className={deleteButton}>
+        {userIsAuthor ? (
+          <button onClick={handleDeleteCommentClick}>delete my comment</button>
+        ) : (
+          <p></p>
+        )}
+        {deleteError ? <ErrorHandling error={deleteError} /> : <p></p>}
+      </section>
     </section>
   );
 };
