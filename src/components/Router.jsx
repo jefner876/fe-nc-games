@@ -5,7 +5,7 @@ import { ReviewPage } from "./ReviewPage";
 import { useCategories } from "../hooks/useCategories";
 import { ErrorHandling } from "./ErrorHandling";
 
-export const CategoryHandler = () => {
+export const Router = () => {
   const { categories, error, isLoading } = useCategories();
 
   if (error) return <ErrorHandling error={error} />;
@@ -20,6 +20,12 @@ export const CategoryHandler = () => {
       />
       <Route path="/" element={<Home categories={categories} />} />
       <Route path="/review/:review_id" element={<ReviewPage />} />
+      <Route
+        path="*"
+        element={
+          <ErrorHandling error={{ status: 404, msg: "Route not found" }} />
+        }
+      />
     </Routes>
   );
 };

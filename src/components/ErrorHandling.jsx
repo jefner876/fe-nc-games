@@ -1,17 +1,22 @@
+import styles from "../modules/ErrorHandling.module.css";
+const { errorImg, errorWrapper } = styles;
 export const ErrorHandling = ({ error }) => {
-  //custom errors
+  let status = null;
+  let msg = null;
   if (error.status) {
-    return (
-      <p>
-        Status: {error.status} <br></br> {error.msg}
-      </p>
-    );
+    status = error.status;
+    msg = error.msg;
+  } else {
+    status = error.response.status;
+    msg = error.response.data.msg;
   }
 
-  //axios errors
   return (
-    <p>
-      Status:{error.response.status} <br></br> {error.response.data.msg}
-    </p>
+    <section className={errorWrapper}>
+      <p>
+        Status: {status} <br></br> {msg}
+      </p>
+      <img className={errorImg} src={`https://http.cat/${status}`} alt="" />
+    </section>
   );
 };

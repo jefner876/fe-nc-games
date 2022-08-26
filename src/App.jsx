@@ -5,7 +5,7 @@ import { Title } from "./components/Title";
 import { UserInfoCard } from "./components/UserInfoCard";
 import { UserContext } from "./contexts/User";
 import styles from "./modules/Header.module.css";
-import { CategoryHandler } from "./components/CategoryHandler";
+import { Router } from "./components/Router";
 const { Header } = styles;
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
           <UserInfoCard />
         </header>
         <main>
-          <CategoryHandler />
+          <Router />
         </main>
       </div>
     </UserContext.Provider>
