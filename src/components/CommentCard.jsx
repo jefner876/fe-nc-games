@@ -3,7 +3,6 @@ import { UserContext } from "../contexts/User";
 import { useDeleteComment } from "../hooks/useDeleteComment";
 import styles from "../modules/CommentCard.module.css";
 import { secondsToAge } from "../utils/seconds-to-age";
-import { ErrorHandling } from "./ErrorHandling";
 
 const { commentCard, commentBody, commentCardHeader, postAge, deleteButton } =
   styles;
