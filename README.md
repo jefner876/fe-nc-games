@@ -41,6 +41,7 @@ If you want to develop this project you will first need to:
 ### Minimum Requirements
 
 - Node.js v18.2.0
+- React v18
 - React Router v6
 
 ## Enjoy!
