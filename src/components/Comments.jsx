@@ -6,7 +6,8 @@ import { AddComment } from "./AddComment";
 const { commentSectionHeader } = styles;
 
 export const Comments = ({ review_id, reviewOwner }) => {
-  const { error, comments, isLoading } = useComments(review_id);
+  const { error, comments, isLoading, setRefreshComments } =
+    useComments(review_id);
 
   if (error) return <ErrorHandling error={error} />;
   if (isLoading) return <p>Loading...</p>;
@@ -15,8 +16,11 @@ export const Comments = ({ review_id, reviewOwner }) => {
     <section>
       <h3 className={commentSectionHeader}>Comments</h3>
       <p> {comments.length === 0 ? "Nobody has commented yet" : ""}</p>
-      <AddComment review_id={review_id} />
-      {comments.reverse().map((comment) => {
+      <AddComment
+        review_id={review_id}
+        setRefreshComments={setRefreshComments}
+      />
+      {comments.map((comment) => {
         return (
           <CommentCard
             key={comment.comment_id}
