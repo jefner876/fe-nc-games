@@ -6,9 +6,6 @@ import { ReviewsSortBar } from "./ReviewsSortBar";
 const { reviewsWrapper } = styles;
 
 export const Reviews = ({ categories }) => {
-  const { serverError, reviews, isLoading, invalidCategoryError } =
-    useReviews(categories);
-
   const sortByOptions = [
     "created_at",
     "title",
@@ -23,6 +20,13 @@ export const Reviews = ({ categories }) => {
     { screen: "descending", server: "desc" },
   ];
 
+  const { serverError, reviews, isLoading, invalidQueryError } = useReviews(
+    categories,
+    sortByOptions,
+    orderOptions
+  );
+
+  if (serverError) return <ErrorHandling error={serverError} />;
   if (isLoading) return <p>Loading...</p>;
 
   return (
@@ -33,8 +37,8 @@ export const Reviews = ({ categories }) => {
         orderOptions={orderOptions}
       />
       <section className={reviewsWrapper}>
-        {serverError ? (
-          <ErrorHandling error={serverError} />
+        {invalidQueryError ? (
+          <ErrorHandling error={invalidQueryError} />
         ) : (
           reviews.map((review) => {
             return (
