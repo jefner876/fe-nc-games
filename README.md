@@ -4,7 +4,8 @@
 
 A React app accessing a REST API for boardgame reviews, both parts developed as a solo project during Northcoders Bootcamp.
 
-A version of this app can be found [here](https://you-game.netlify.app/reviews).
+<!-- A version of this app can be found [here](https://you-game.netlify.app/reviews). -->
+
 Information on the REST API may be found [here](https://github.com/jefner876/BE-NC-Games).
 
 ## Setup Process
