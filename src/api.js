@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createSearchParams } from "react-router-dom";
 
-const api = "https://nc-games-portfolio.herokuapp.com/api";
+const api = "https://you-game.onrender.com/api";
 
 export const fetchCategories = () => {
   return axios.get(`${api}/categories`).then(({ data: categories }) => {
